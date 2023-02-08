@@ -229,9 +229,9 @@ class Controllerbadgebadge extends Controller {
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=title'.$url, true);
-        $data['sort_image'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=image'.$url, true);
-        $data['sort_seller_id'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=seller_id'.$url, true);
+        $data['sort_title'] = $this->url->link('badge/badge', 'token=' . $this->session->data['token'] . '&sort=title' . $url, true);
+        $data['sort_image'] = $this->url->link('badge/badge', 'token=' . $this->session->data['token'] . '&sort=image' . $url, true);
+        $data['sort_seller_id'] = $this->url->link('badge/badge', 'token=' . $this->session->data['token'] . '&sort=seller_id' . $url, true);
 
         $url = '';
 
@@ -267,23 +267,27 @@ class Controllerbadgebadge extends Controller {
         $data['heading_title'] = $this->language->get('heading_title');
 
         $data['text_form'] = !isset($this->request->get['badge_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
-        $data['token'] = $this->session->data['token'];
+        $data['text_loading'] = $this->language->get('text_loading');
+        $data['text_confirm'] = $this->language->get('text_confirm');
+        $data['text_badge'] = $this->language->get('text_badge');
+
         $data['entry_title'] = $this->language->get('entry_title');
         $data['entry_image'] = $this->language->get('entry_image');
         $data['entry_seller_id'] = $this->language->get('entry_seller_id');
-        $data['text_loading'] = $this->language->get('text_loading');
         $data['entry_seller_badge'] = $this->language->get('entry_seller_badge');
         $data['entry_seller'] = $this->language->get('entry_seller');
-        $data['help_seller_id'] = $this->language->get('help_seller_id');
+		
         $data['button_seller_add'] = $this->language->get('button_seller_add');
         $data['button_seller_delete'] = $this->language->get('button_seller_delete');
-        $data['text_confirm'] = $this->language->get('text_confirm');
-        $data['text_badge'] = $this->language->get('text_badge');
         $data['button_save'] = $this->language->get('button_save');
         $data['button_cancel'] = $this->language->get('button_cancel');
-        $data['tab_general'] = $this->language->get('tab_general');
 
+        $data['tab_general'] = $this->language->get('tab_general');
         $data['tab_sellerbadge'] = $this->language->get('tab_sellerbadge');
+
+        $data['help_seller_id'] = $this->language->get('help_seller_id');
+
+        $data['token'] = $this->session->data['token'];
 
         if (isset($this->request->get['badge_id'])) {
             $data['badge_id'] = (int)$this->request->get['badge_id'];
@@ -327,18 +331,18 @@ class Controllerbadgebadge extends Controller {
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, true),
+            'href' => $this->url->link('badge/badge', 'token=' . $this->session->data['token'] . $url, true),
         );
 
         if (!isset($this->request->get['badge_id'])) {
-            $data['action'] = $this->url->link('badge/badge/add', 'token='.$this->session->data['token'].$url, true);
+            $data['action'] = $this->url->link('badge/badge/add', 'token=' . $this->session->data['token'] . $url, true);
         } else {
-            $data['action'] = $this->url->link('badge/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].$url, true);
+            $data['action'] = $this->url->link('badge/badge/edit', 'token=' . $this->session->data['token'] . '&badge_id=' . $this->request->get['badge_id'] . $url, true);
         }
 
         $data['cancel'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, true);
@@ -394,8 +398,7 @@ class Controllerbadgebadge extends Controller {
         $this->response->setOutput($this->load->view('badge/badge_form', $data));
     }
 
-    public function sellerbadge()
-    {
+    public function sellerbadge() {
         $this->load->language('badge/badge');
 
         $this->load->model('badge/badge');
@@ -428,13 +431,13 @@ class Controllerbadgebadge extends Controller {
         $data['column_action'] = $this->language->get('column_action');
 
         if (isset($this->request->get['page'])) {
-            $page = $this->request->get['page'];
+            $page = (int)$this->request->get['page'];
         } else {
             $page = 1;
         }
 
         if (isset($this->request->get['badge_id'])) {
-            $data['badge_id'] = $this->request->get['badge_id'];
+            $data['badge_id'] = (int)$this->request->get['badge_id'];
         } else {
             $data['badge_id'] = 0;
         }
@@ -460,9 +463,9 @@ class Controllerbadgebadge extends Controller {
         foreach ($results as $result) {
             $data['sellers'][] = array(
                 'seller_id' => $result['customer_id'],
-            'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
-                'name' => $result['firstname'].' '.$result['lastname'],
-                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], true),
+                'status'    => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+                'name'      => $result['firstname'].' '.$result['lastname'],
+                'edit'      => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], true),
             );
         }
 
@@ -481,8 +484,7 @@ class Controllerbadgebadge extends Controller {
         $this->response->setOutput($this->load->view('badge/badge_sellerbadge', $data));
     }
 
-    public function sellerbadgedelete()
-    {
+    public function sellerbadgedelete() {
         $this->load->language('badge/badge');
 
         $this->load->model('badge/badge');
@@ -516,13 +518,13 @@ class Controllerbadgebadge extends Controller {
         $data['column_action'] = $this->language->get('column_action');
 
         if (isset($this->request->get['page'])) {
-            $page = $this->request->get['page'];
+            $page = (int)$this->request->get['page'];
         } else {
             $page = 1;
         }
 
         if (isset($this->request->get['badge_id'])) {
-            $data['badge_id'] = $this->request->get['badge_id'];
+            $data['badge_id'] = (int)$this->request->get['badge_id'];
         } else {
             $data['badge_id'] = 0;
         }
