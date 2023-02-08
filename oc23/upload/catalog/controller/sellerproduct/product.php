@@ -103,8 +103,7 @@ class ControllersellerproductProduct extends Controller {
         $this->getForm();
     }
 
-    public function edit()
-    {
+    public function edit() {
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js');
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
@@ -802,38 +801,38 @@ class ControllersellerproductProduct extends Controller {
             $data['entry_recurring'] = $this->language->get('entry_recurring');
 
             $data['help_keyword'] = $this->language->get('help_keyword');
-            $data['help_sku'] = $this->language->get('help_sku');
-            $data['help_upc'] = $this->language->get('help_upc');
-            $data['help_ean'] = $this->language->get('help_ean');
-            $data['help_jan'] = $this->language->get('help_jan');
-            $data['help_isbn'] = $this->language->get('help_isbn');
-            $data['help_mpn'] = $this->language->get('help_mpn');
-            $data['help_minimum'] = $this->language->get('help_minimum');
-            $data['help_manufacturer'] = $this->language->get('help_manufacturer');
-            $data['help_stock_status'] = $this->language->get('help_stock_status');
-            $data['help_points'] = $this->language->get('help_points');
-            $data['help_category'] = $this->language->get('help_category');
-            $data['help_filter'] = $this->language->get('help_filter');
-            $data['help_download'] = $this->language->get('help_download');
-            $data['help_related'] = $this->language->get('help_related');
-            $data['help_tag'] = $this->language->get('help_tag');
+		$data['help_sku'] = $this->language->get('help_sku');
+		$data['help_upc'] = $this->language->get('help_upc');
+		$data['help_ean'] = $this->language->get('help_ean');
+		$data['help_jan'] = $this->language->get('help_jan');
+		$data['help_isbn'] = $this->language->get('help_isbn');
+		$data['help_mpn'] = $this->language->get('help_mpn');
+		$data['help_minimum'] = $this->language->get('help_minimum');
+		$data['help_manufacturer'] = $this->language->get('help_manufacturer');
+		$data['help_stock_status'] = $this->language->get('help_stock_status');
+		$data['help_points'] = $this->language->get('help_points');
+		$data['help_category'] = $this->language->get('help_category');
+		$data['help_filter'] = $this->language->get('help_filter');
+		$data['help_download'] = $this->language->get('help_download');
+		$data['help_related'] = $this->language->get('help_related');
+		$data['help_tag'] = $this->language->get('help_tag');
 
-            $data['button_save'] = $this->language->get('button_save');
-            $data['button_cancel'] = $this->language->get('button_cancel');
-            $data['button_add'] = $this->language->get('button_add');
+		$data['button_save'] = $this->language->get('button_save');
+		$data['button_cancel'] = $this->language->get('button_cancel');
+		$data['button_add'] = $this->language->get('button_add');
+		$data['button_remove'] = $this->language->get('button_remove');
 
-            $data['tab_general'] = $this->language->get('tab_general');
-            $data['tab_data'] = $this->language->get('tab_data');
-            $data['tab_attribute'] = $this->language->get('tab_attribute');
-            $data['tab_option'] = $this->language->get('tab_option');
-            $data['tab_recurring'] = $this->language->get('tab_recurring');
-            $data['tab_discount'] = $this->language->get('tab_discount');
-            $data['tab_special'] = $this->language->get('tab_special');
-            $data['tab_image'] = $this->language->get('tab_image');
-            $data['tab_links'] = $this->language->get('tab_links');
-            $data['tab_reward'] = $this->language->get('tab_reward');
-            $data['tab_design'] = $this->language->get('tab_design');
-            $data['tab_openbay'] = $this->language->get('tab_openbay');
+		$data['tab_general'] = $this->language->get('tab_general');
+		$data['tab_data'] = $this->language->get('tab_data');
+		$data['tab_attribute'] = $this->language->get('tab_attribute');
+		$data['tab_option'] = $this->language->get('tab_option');
+		$data['tab_recurring'] = $this->language->get('tab_recurring');
+		$data['tab_discount'] = $this->language->get('tab_discount');
+		$data['tab_special'] = $this->language->get('tab_special');
+		$data['tab_image'] = $this->language->get('tab_image');
+		$data['tab_links'] = $this->language->get('tab_links');
+		$data['tab_reward'] = $this->language->get('tab_reward');
+		$data['tab_design'] = $this->language->get('tab_design');
 
             if (isset($this->error['warning'])) {
                 $data['error_warning'] = $this->error['warning'];

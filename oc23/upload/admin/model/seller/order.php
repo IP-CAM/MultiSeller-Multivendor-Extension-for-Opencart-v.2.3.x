@@ -1274,7 +1274,7 @@ class ModelSellerOrder extends Model {
 	}
 
 
-		public function addSellerOrderHistory($order_id, $order_status_id, $seller_id, $comment = '', $notify = false, $override = false) {
+		public function addSellerOrderHistory($order_id, $seller_id, $order_status_id, $comment = '', $notify = false, $override = false ) {
 		$this->event->trigger('pre.order.sellerhistory.add', $order_id);
 
 		$order_info = $this->getSellerOrder($order_id, $seller_id);
