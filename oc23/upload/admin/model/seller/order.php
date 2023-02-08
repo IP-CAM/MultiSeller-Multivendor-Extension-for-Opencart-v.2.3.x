@@ -1,9 +1,7 @@
 <?php
+class ModelSellerOrder extends Model {
 
-class ModelSellerOrder extends Model
-{
-    public function getOrder($order_id, $seller_id)
-    {
+    public function getOrder($order_id, $seller_id) {
         $order_query = $this->db->query('SELECT * FROM `'.DB_PREFIX."order` o WHERE o.order_id = '".(int) $order_id."'");
 
         $seller_order_query = $this->db->query("SELECT *, CONCAT(firstname, ' ', lastname) AS seller FROM `".DB_PREFIX."customer`  WHERE customer_id = '".(int) $seller_id."'");
@@ -68,7 +66,7 @@ class ModelSellerOrder extends Model
             }
 
             if ($order_query->row['affiliate_id']) {
-                $affiliate_id = $order_query->row['affiliate_id'];
+                $affiliate_id = (int)$order_query->row['affiliate_id'];
             } else {
                 $affiliate_id = 0;
             }
@@ -562,7 +560,7 @@ class ModelSellerOrder extends Model
         return $query->row;
     }
 
-    public function addOrderHistory($seller_id, $order_id, $settlement = true, $order_status_id, $comment = '', $notify = false)
+    public function addOrderHistory($order_id, $seller_id, , $order_status_id, $settlement = true, $comment = '', $notify = false)
     {
         $this->event->trigger('pre.order.history.add', $order_id);
 
@@ -1134,7 +1132,7 @@ class ModelSellerOrder extends Model
         $this->event->trigger('post.order.history.add', $order_id);
     }
 
-    public function getSellerOrder($order_id,$seller_id) {
+    public function getSellerOrder($order_id, $seller_id) {
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
 
 		$seller_order_query = $this->db->query("SELECT *, CONCAT(firstname, ' ', lastname) AS seller FROM `" . DB_PREFIX . "customer`  WHERE customer_id = '" . (int)$seller_id . "'");
@@ -1276,10 +1274,10 @@ class ModelSellerOrder extends Model
 	}
 
 
-		public function addSellerOrderHistory($order_id, $order_status_id, $comment = '', $notify = false, $override = false,$seller_id) {
+		public function addSellerOrderHistory($order_id, $order_status_id, $seller_id, $comment = '', $notify = false, $override = false) {
 		$this->event->trigger('pre.order.sellerhistory.add', $order_id);
 
-		$order_info = $this->getSellerOrder($order_id,$seller_id);
+		$order_info = $this->getSellerOrder($order_id, $seller_id);
 
 		if ($order_info) {
 

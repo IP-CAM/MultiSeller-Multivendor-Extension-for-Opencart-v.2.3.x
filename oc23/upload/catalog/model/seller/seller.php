@@ -214,7 +214,7 @@ class Modelsellerseller extends Model
                 'height' => $query->row['height'],
                 'length_class_id' => $query->row['length_class_id'],
                 'subtract' => $query->row['subtract'],
-                'rating' => round($query->row['rating']),
+                'rating' => round(($query->row['rating']===null) ? 0 : $query->row['rating']),
                 'reviews' => $query->row['reviews'] ? $query->row['reviews'] : 0,
                 'minimum' => $query->row['minimum'],
                 'sort_order' => $query->row['sort_order'],
@@ -291,7 +291,7 @@ class Modelsellerseller extends Model
         $this->db->query('INSERT INTO '.DB_PREFIX."customer_history SET customer_id = '".(int) $seller_id."', comment = '".$this->db->escape(strip_tags($comment))."', date_added = NOW()");
     }
 
-    public function addTransaction($seller_id, $description = '', $amount = '', $order_id)
+    public function addTransaction($seller_id, $order_id, $description = '', $amount = '')
     {
         $seller_info = $this->getseller($seller_id);
 
