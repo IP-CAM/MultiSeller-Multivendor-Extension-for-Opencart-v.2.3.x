@@ -42,7 +42,7 @@ class ControllerSellersellerGroup extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getForm();
@@ -75,7 +75,7 @@ class ControllerSellersellerGroup extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getForm();
@@ -110,7 +110,7 @@ class ControllerSellersellerGroup extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -154,16 +154,16 @@ class ControllerSellersellerGroup extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true),
         );
 
-        $data['insert'] = $this->url->link('seller/seller_group/add', 'token='.$this->session->data['token'].$url, 'SSL');
-        $data['delete'] = $this->url->link('seller/seller_group/delete', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['insert'] = $this->url->link('seller/seller_group/add', 'token='.$this->session->data['token'].$url, true);
+        $data['delete'] = $this->url->link('seller/seller_group/delete', 'token='.$this->session->data['token'].$url, true);
 
         $data['seller_groups'] = array();
 
@@ -188,7 +188,7 @@ class ControllerSellersellerGroup extends Controller
                 'status' => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'product_status' => ($result['product_status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'subscription_price' => $result['subscription_price'],
-                'edit' => $this->url->link('seller/seller_group/edit', 'token='.$this->session->data['token'].'&seller_group_id='.$result['seller_group_id'].$url, 'SSL'),
+                'edit' => $this->url->link('seller/seller_group/edit', 'token='.$this->session->data['token'].'&seller_group_id='.$result['seller_group_id'].$url, true),
             );
         }
 
@@ -242,13 +242,13 @@ class ControllerSellersellerGroup extends Controller
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_name'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cgd.name'.$url, 'SSL');
-        $data['sort_sort_order'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.sort_order'.$url, 'SSL');
-        $data['sort_status'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.status'.$url, 'SSL');
-        $data['sort_product_status'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.product_status'.$url, 'SSL');
-        $data['sort_subscription_duration'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.subscription_duration'.$url, 'SSL');
-        $data['sort_product_limit'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.product_limit'.$url, 'SSL');
-        $data['sort_subscription_price'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.subscription_price'.$url, 'SSL');
+        $data['sort_name'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cgd.name'.$url, true);
+        $data['sort_sort_order'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.sort_order'.$url, true);
+        $data['sort_status'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.status'.$url, true);
+        $data['sort_product_status'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.product_status'.$url, true);
+        $data['sort_subscription_duration'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.subscription_duration'.$url, true);
+        $data['sort_product_limit'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.product_limit'.$url, true);
+        $data['sort_subscription_price'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].'&sort=cg.subscription_price'.$url, true);
 
         $url = '';
 
@@ -264,7 +264,7 @@ class ControllerSellersellerGroup extends Controller
         $pagination->total = $seller_group_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url.'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url.'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -277,7 +277,7 @@ class ControllerSellersellerGroup extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('seller/seller_group_list.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_group_list', $data));
     }
 
     protected function getForm()
@@ -338,21 +338,21 @@ class ControllerSellersellerGroup extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true),
         );
 
         if (!isset($this->request->get['seller_group_id'])) {
-            $data['action'] = $this->url->link('seller/seller_group/add', 'token='.$this->session->data['token'].$url, 'SSL');
+            $data['action'] = $this->url->link('seller/seller_group/add', 'token='.$this->session->data['token'].$url, true);
         } else {
-            $data['action'] = $this->url->link('seller/seller_group/edit', 'token='.$this->session->data['token'].'&seller_group_id='.$this->request->get['seller_group_id'].$url, 'SSL');
+            $data['action'] = $this->url->link('seller/seller_group/edit', 'token='.$this->session->data['token'].'&seller_group_id='.$this->request->get['seller_group_id'].$url, true);
         }
 
-        $data['cancel'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['cancel'] = $this->url->link('seller/seller_group', 'token='.$this->session->data['token'].$url, true);
 
         if (isset($this->request->get['seller_group_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $seller_group_info = $this->model_seller_seller_group->getsellerGroup($this->request->get['seller_group_id']);
@@ -468,7 +468,7 @@ class ControllerSellersellerGroup extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('seller/seller_group_form.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_group_form', $data));
     }
 
     protected function validateForm()

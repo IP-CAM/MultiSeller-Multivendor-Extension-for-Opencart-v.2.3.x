@@ -42,7 +42,7 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getForm();
@@ -75,7 +75,7 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getForm();
@@ -110,7 +110,7 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -154,16 +154,16 @@ class Controllerbankbank extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true),
         );
 
-        $data['insert'] = $this->url->link('bank/bank/add', 'token='.$this->session->data['token'].$url, 'SSL');
-        $data['delete'] = $this->url->link('bank/bank/delete', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['insert'] = $this->url->link('bank/bank/add', 'token='.$this->session->data['token'].$url, true);
+        $data['delete'] = $this->url->link('bank/bank/delete', 'token='.$this->session->data['token'].$url, true);
 
         $data['bankes'] = array();
 
@@ -183,7 +183,7 @@ class Controllerbankbank extends Controller
                 'bank_id' => $result['bank_id'],
                 'title' => $result['title'].(($result['bank_id'] == $this->config->get('config_bank_id')) ? $this->language->get('text_default') : null),
 
-                'edit' => $this->url->link('bank/bank/edit', 'token='.$this->session->data['token'].'&bank_id='.$result['bank_id'].$url, 'SSL'),
+                'edit' => $this->url->link('bank/bank/edit', 'token='.$this->session->data['token'].'&bank_id='.$result['bank_id'].$url, true),
             );
         }
 
@@ -234,9 +234,9 @@ class Controllerbankbank extends Controller
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=title'.$url, 'SSL');
-        $data['sort_unit'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=unit'.$url, 'SSL');
-        $data['sort_value'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=value'.$url, 'SSL');
+        $data['sort_title'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=title'.$url, true);
+        $data['sort_unit'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=unit'.$url, true);
+        $data['sort_value'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].'&sort=value'.$url, true);
 
         $url = '';
 
@@ -252,7 +252,7 @@ class Controllerbankbank extends Controller
         $pagination->total = $bank_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url.'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url.'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -265,7 +265,7 @@ class Controllerbankbank extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('bank/bank_list.tpl', $data));
+        $this->response->setOutput($this->load->view('bank/bank_list', $data));
     }
 
     protected function getForm()
@@ -319,21 +319,21 @@ class Controllerbankbank extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true),
         );
 
         if (!isset($this->request->get['bank_id'])) {
-            $data['action'] = $this->url->link('bank/bank/add', 'token='.$this->session->data['token'].$url, 'SSL');
+            $data['action'] = $this->url->link('bank/bank/add', 'token='.$this->session->data['token'].$url, true);
         } else {
-            $data['action'] = $this->url->link('bank/bank/edit', 'token='.$this->session->data['token'].'&bank_id='.$this->request->get['bank_id'].$url, 'SSL');
+            $data['action'] = $this->url->link('bank/bank/edit', 'token='.$this->session->data['token'].'&bank_id='.$this->request->get['bank_id'].$url, true);
         }
 
-        $data['cancel'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['cancel'] = $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true);
 
         if (isset($this->request->get['bank_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $bank_info = $this->model_bank_bank->getbank($this->request->get['bank_id']);
@@ -363,7 +363,7 @@ class Controllerbankbank extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('bank/bank_form.tpl', $data));
+        $this->response->setOutput($this->load->view('bank/bank_form', $data));
     }
 
     protected function validateForm()

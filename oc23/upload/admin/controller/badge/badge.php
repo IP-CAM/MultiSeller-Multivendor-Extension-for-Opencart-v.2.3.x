@@ -1,11 +1,8 @@
 <?php
-
-class Controllerbadgebadge extends Controller
-{
+class Controllerbadgebadge extends Controller {
     private $error = array();
 
-    public function index()
-    {
+    public function index() {
         $this->load->language('badge/badge');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -15,8 +12,7 @@ class Controllerbadgebadge extends Controller
         $this->getList();
     }
 
-    public function add()
-    {
+    public function add() {
         $this->load->language('badge/badge');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -42,14 +38,13 @@ class Controllerbadgebadge extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('badge/badge', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getForm();
     }
 
-    public function edit()
-    {
+    public function edit() {
         $this->load->language('badge/badge');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -75,14 +70,13 @@ class Controllerbadgebadge extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('badge/badge', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getForm();
     }
 
-    public function delete()
-    {
+    public function delete() {
         $this->load->language('badge/badge');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -110,14 +104,13 @@ class Controllerbadgebadge extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('badge/badge', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getList();
     }
 
-    protected function getList()
-    {
+    protected function getList() {
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
@@ -131,7 +124,7 @@ class Controllerbadgebadge extends Controller
         }
 
         if (isset($this->request->get['page'])) {
-            $page = $this->request->get['page'];
+            $page = (int)$this->request->get['page'];
         } else {
             $page = 1;
         }
@@ -154,21 +147,21 @@ class Controllerbadgebadge extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('badge/badge', 'token=' . $this->session->data['token'] . $url, true),
         );
 
-        $data['insert'] = $this->url->link('badge/badge/add', 'token='.$this->session->data['token'].$url, 'SSL');
-        $data['delete'] = $this->url->link('badge/badge/delete', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['insert'] = $this->url->link('badge/badge/add', 'token=' . $this->session->data['token'] . $url, true);
+        $data['delete'] = $this->url->link('badge/badge/delete', 'token=' . $this->session->data['token'] . $url, true);
 
         $data['badges'] = array();
 
         $filter_data = array(
-            'sort' => $sort,
+            'sort'  => $sort,
             'order' => $order,
             'start' => ($page - 1) * $this->config->get('config_limit_admin'),
             'limit' => $this->config->get('config_limit_admin'),
@@ -183,9 +176,9 @@ class Controllerbadgebadge extends Controller
         foreach ($results as $result) {
             $data['badges'][] = array(
                 'badge_id' => $result['badge_id'],
-                'title' => $result['title'].(($result['badge_id'] == $this->config->get('config_badge_id')) ? $this->language->get('text_default') : null),
-                'image' => (is_file(DIR_IMAGE.$result['image']) ? $this->model_tool_image->resize($result['image'], 40, 40) : $this->model_tool_image->resize('no_image.png', 40, 40)),
-                'edit' => $this->url->link('badge/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'].$url, 'SSL'),
+                'title'    => $result['title'] . (($result['badge_id'] == $this->config->get('config_badge_id')) ? $this->language->get('text_default') : null),
+                'image'    => (is_file(DIR_IMAGE . $result['image']) ? $this->model_tool_image->resize($result['image'], 40, 40) : $this->model_tool_image->resize('no_image.png', 40, 40)),
+                'edit'     => $this->url->link('badge/badge/edit', 'token=' . $this->session->data['token'] . '&badge_id=' . $result['badge_id'] . $url, true),
             );
         }
 
@@ -236,9 +229,9 @@ class Controllerbadgebadge extends Controller
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=title'.$url, 'SSL');
-        $data['sort_image'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=image'.$url, 'SSL');
-        $data['sort_seller_id'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=seller_id'.$url, 'SSL');
+        $data['sort_title'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=title'.$url, true);
+        $data['sort_image'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=image'.$url, true);
+        $data['sort_seller_id'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].'&sort=seller_id'.$url, true);
 
         $url = '';
 
@@ -254,7 +247,7 @@ class Controllerbadgebadge extends Controller
         $pagination->total = $badge_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url.'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url.'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -267,11 +260,10 @@ class Controllerbadgebadge extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('badge/badge_list.tpl', $data));
+        $this->response->setOutput($this->load->view('badge/badge_list', $data));
     }
 
-    protected function getForm()
-    {
+    protected function getForm() {
         $data['heading_title'] = $this->language->get('heading_title');
 
         $data['text_form'] = !isset($this->request->get['badge_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -294,7 +286,7 @@ class Controllerbadgebadge extends Controller
         $data['tab_sellerbadge'] = $this->language->get('tab_sellerbadge');
 
         if (isset($this->request->get['badge_id'])) {
-            $data['badge_id'] = $this->request->get['badge_id'];
+            $data['badge_id'] = (int)$this->request->get['badge_id'];
         } else {
             $data['badge_id'] = 0;
         }
@@ -335,21 +327,21 @@ class Controllerbadgebadge extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, true),
         );
 
         if (!isset($this->request->get['badge_id'])) {
-            $data['action'] = $this->url->link('badge/badge/add', 'token='.$this->session->data['token'].$url, 'SSL');
+            $data['action'] = $this->url->link('badge/badge/add', 'token='.$this->session->data['token'].$url, true);
         } else {
-            $data['action'] = $this->url->link('badge/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].$url, 'SSL');
+            $data['action'] = $this->url->link('badge/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].$url, true);
         }
 
-        $data['cancel'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['cancel'] = $this->url->link('badge/badge', 'token='.$this->session->data['token'].$url, true);
 
         if (isset($this->request->get['badge_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $badge_info = $this->model_badge_badge->getbadge($this->request->get['badge_id']);
@@ -399,7 +391,7 @@ class Controllerbadgebadge extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('badge/badge_form.tpl', $data));
+        $this->response->setOutput($this->load->view('badge/badge_form', $data));
     }
 
     public function sellerbadge()
@@ -470,7 +462,7 @@ class Controllerbadgebadge extends Controller
                 'seller_id' => $result['customer_id'],
             'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                 'name' => $result['firstname'].' '.$result['lastname'],
-                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], 'SSL'),
+                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], true),
             );
         }
 
@@ -480,13 +472,13 @@ class Controllerbadgebadge extends Controller
         $pagination->total = $badge_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('badge/badge/sellerbadge', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('badge/badge/sellerbadge', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($badge_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($badge_total - 10)) ? $badge_total : ((($page - 1) * 10) + 10), $badge_total, ceil($badge_total / 10));
 
-        $this->response->setOutput($this->load->view('badge/badge_sellerbadge.tpl', $data));
+        $this->response->setOutput($this->load->view('badge/badge_sellerbadge', $data));
     }
 
     public function sellerbadgedelete()
@@ -558,7 +550,7 @@ class Controllerbadgebadge extends Controller
                 'seller_id' => $result['customer_id'],
             'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                     'name' => $result['firstname'].' '.$result['lastname'],
-                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], 'SSL'),
+                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], true),
             );
         }
 
@@ -568,13 +560,13 @@ class Controllerbadgebadge extends Controller
         $pagination->total = $badge_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('badge/badge/sellerbadge', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('badge/badge/sellerbadge', 'token='.$this->session->data['token'].'&badge_id='.$this->request->get['badge_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($badge_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($badge_total - 10)) ? $badge_total : ((($page - 1) * 10) + 10), $badge_total, ceil($badge_total / 10));
 
-        $this->response->setOutput($this->load->view('badge/badge_sellerbadge.tpl', $data));
+        $this->response->setOutput($this->load->view('badge/badge_sellerbadge', $data));
     }
 
     protected function validateForm()

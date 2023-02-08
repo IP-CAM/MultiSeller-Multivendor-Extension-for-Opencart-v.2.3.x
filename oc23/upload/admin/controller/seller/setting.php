@@ -26,15 +26,16 @@ class ControllerSellerSetting extends Controller {
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
-		
-        $data['tab_multiseller_setting'] = $this->language->get('tab_multiseller_setting');
-$data['tab_multisellergeneral'] = $this->language->get('tab_multisellergeneral');
-$data['tab_multisellerproductsetting'] = $this->language->get('tab_multisellerproductsetting');
-$data['tab_multisellerordersetting'] = $this->language->get('tab_multisellerordersetting');
-$data['tab_multisellerdownloadsetting'] = $this->language->get('tab_multisellerdownloadsetting');
-$data['text_sellerdownloadstatus'] = $this->language->get('text_sellerdownloadstatus');
+		$data['text_sellerdownloadstatus'] = $this->language->get('text_sellerdownloadstatus');
 
-$this->load->model('catalog/information');
+        $data['tab_multiseller_setting'] = $this->language->get('tab_multiseller_setting');
+		$data['tab_multisellergeneral'] = $this->language->get('tab_multisellergeneral');
+		$data['tab_multisellerproductsetting'] = $this->language->get('tab_multisellerproductsetting');
+		$data['tab_multisellerordersetting'] = $this->language->get('tab_multisellerordersetting');
+		$data['tab_multisellerdownloadsetting'] = $this->language->get('tab_multisellerdownloadsetting');
+
+
+		$this->load->model('catalog/information');
 
 		$data['informations'] = $this->model_catalog_information->getInformations();
 
@@ -453,7 +454,6 @@ if (isset($this->request->post['config_multiseller_related_products'])) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		
 		return !$this->error;
 	}
 		

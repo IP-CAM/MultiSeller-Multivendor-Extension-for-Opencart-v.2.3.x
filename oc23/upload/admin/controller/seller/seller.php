@@ -70,7 +70,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getAllCustomer();
@@ -131,7 +131,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getForm();
@@ -194,7 +194,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -259,7 +259,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -335,7 +335,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -414,7 +414,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -485,7 +485,7 @@ class ControllerSellerseller extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'));
+            $this->response->redirect($this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true));
         }
 
         $this->getList();
@@ -599,16 +599,16 @@ class ControllerSellerseller extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true),
         );
 
-        $data['insert'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url, 'SSL');
-        $data['delete'] = $this->url->link('seller/seller/delete', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['insert'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url, true);
+        $data['delete'] = $this->url->link('seller/seller/delete', 'token='.$this->session->data['token'].$url, true);
 
         $data['sellers'] = array();
 
@@ -645,10 +645,10 @@ class ControllerSellerseller extends Controller
                 'seller_category' => $this->model_seller_seller->getsellecategory($result['customer_id']),
                 'ip' => $result['ip'],
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['seller_date_added'])),
-                'edit' => $this->url->link('seller/seller/edit', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, 'SSL'),
-                'approve' => $this->url->link('seller/seller/approve', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, 'SSL'),
-                'upgrade_sellergroup' => $this->url->link('seller/seller/upgrade_sellergroup', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, 'SSL'),
-                'disapprove' => $this->url->link('seller/seller/disapprove', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, 'SSL'),
+                'edit' => $this->url->link('seller/seller/edit', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, true),
+                'approve' => $this->url->link('seller/seller/approve', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, true),
+                'upgrade_sellergroup' => $this->url->link('seller/seller/upgrade_sellergroup', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, true),
+                'disapprove' => $this->url->link('seller/seller/disapprove', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, true),
             );
         }
 
@@ -753,13 +753,13 @@ class ControllerSellerseller extends Controller
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_name'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=name'.$url, 'SSL');
-        $data['sort_email'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.email'.$url, 'SSL');
-        $data['sort_seller_group'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=seller_group'.$url, 'SSL');
-        $data['sort_status'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.seller_approved'.$url, 'SSL');
-        $data['sort_ip'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.ip'.$url, 'SSL');
-        $data['sort_seller_product'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=pts.seller_id'.$url, 'SSL');
-        $data['sort_date_added'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.date_added'.$url, 'SSL');
+        $data['sort_name'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=name'.$url, true);
+        $data['sort_email'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.email'.$url, true);
+        $data['sort_seller_group'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=seller_group'.$url, true);
+        $data['sort_status'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.seller_approved'.$url, true);
+        $data['sort_ip'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.ip'.$url, true);
+        $data['sort_seller_product'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=pts.seller_id'.$url, true);
+        $data['sort_date_added'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].'&sort=c.date_added'.$url, true);
 
         $url = '';
 
@@ -803,7 +803,7 @@ class ControllerSellerseller extends Controller
         $pagination->total = $seller_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url.'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url.'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -832,7 +832,7 @@ class ControllerSellerseller extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('seller/seller_list.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_list', $data));
     }
 
     protected function getAllCustomer()
@@ -961,16 +961,16 @@ class ControllerSellerseller extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true),
         );
 
-        $data['insert'] = $this->url->link('customer/customer/add', 'token='.$this->session->data['token'].$url, 'SSL');
-        $data['addtoseller'] = $this->url->link('seller/seller/addtoseller', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['insert'] = $this->url->link('customer/customer/add', 'token='.$this->session->data['token'].$url, true);
+        $data['addtoseller'] = $this->url->link('seller/seller/addtoseller', 'token='.$this->session->data['token'].$url, true);
 
         $data['customers'] = array();
 
@@ -1003,8 +1003,8 @@ class ControllerSellerseller extends Controller
                 'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                 'ip' => $result['ip'],
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-                'edit' => $this->url->link('customer/customer/edit', 'token='.$this->session->data['token'].'&customer_id='.$result['customer_id'].$url, 'SSL'),
-                'approve' => $this->url->link('seller/seller/addnewseller', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, 'SSL'),
+                'edit' => $this->url->link('customer/customer/edit', 'token='.$this->session->data['token'].'&customer_id='.$result['customer_id'].$url, true),
+                'approve' => $this->url->link('seller/seller/addnewseller', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].$url, true),
                 'approved' => $result['approved'],
             );
         }
@@ -1114,13 +1114,13 @@ class ControllerSellerseller extends Controller
             $url .= '&page='.$this->request->get['page'];
         }
 
-        $data['sort_name'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=name'.$url, 'SSL');
-        $data['sort_email'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.email'.$url, 'SSL');
-        $data['sort_customer_group'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=customer_group'.$url, 'SSL');
-        $data['sort_seller_group'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=sg.seller_group'.$url, 'SSL');
-        $data['sort_status'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.status'.$url, 'SSL');
-        $data['sort_ip'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.ip'.$url, 'SSL');
-        $data['sort_date_added'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.date_added'.$url, 'SSL');
+        $data['sort_name'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=name'.$url, true);
+        $data['sort_email'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.email'.$url, true);
+        $data['sort_customer_group'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=customer_group'.$url, true);
+        $data['sort_seller_group'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=sg.seller_group'.$url, true);
+        $data['sort_status'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.status'.$url, true);
+        $data['sort_ip'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.ip'.$url, true);
+        $data['sort_date_added'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].'&sort=c.date_added'.$url, true);
 
         $url = '';
 
@@ -1168,7 +1168,7 @@ class ControllerSellerseller extends Controller
         $pagination->total = $customer_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url.'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url.'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
@@ -1199,7 +1199,7 @@ class ControllerSellerseller extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('seller/allcustomer_list.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/allcustomer_list', $data));
     }
 
     protected function getForm()
@@ -1388,21 +1388,21 @@ class ControllerSellerseller extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL'),
+            'href' => $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true),
         );
 
         if (!isset($this->request->get['seller_id'])) {
-            $data['action'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url, 'SSL');
+            $data['action'] = $this->url->link('seller/seller/add', 'token='.$this->session->data['token'].$url, true);
         } else {
-            $data['action'] = $this->url->link('seller/seller/edit', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, 'SSL');
+            $data['action'] = $this->url->link('seller/seller/edit', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, true);
         }
 
-        $data['cancel'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, 'SSL');
+        $data['cancel'] = $this->url->link('seller/seller', 'token='.$this->session->data['token'].$url, true);
 
         if (isset($this->request->get['seller_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
             $seller_info = $this->model_seller_seller->getseller($this->request->get['seller_id']);
@@ -1524,9 +1524,9 @@ class ControllerSellerseller extends Controller
               $data['seller_approved'] = '';
           }
 
-        $data['approve'] = $this->url->link('seller/seller/approve', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, 'SSL');
-        $data['upgrade_sellergroup'] = $this->url->link('seller/seller/upgrade_sellergroup', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, 'SSL');
-        $data['disapprove'] = $this->url->link('seller/seller/disapprove', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, 'SSL');
+        $data['approve'] = $this->url->link('seller/seller/approve', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, true);
+        $data['upgrade_sellergroup'] = $this->url->link('seller/seller/upgrade_sellergroup', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, true);
+        $data['disapprove'] = $this->url->link('seller/seller/disapprove', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].$url, true);
 
         // Custom Fields
         $this->load->model('customer/custom_field');
@@ -1697,7 +1697,7 @@ class ControllerSellerseller extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('seller/seller_form.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_form', $data));
     }
 
     protected function validateForm()
@@ -1857,19 +1857,19 @@ class ControllerSellerseller extends Controller
 
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_home'),
-                'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], 'SSL'),
+                'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
             );
 
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('error/not_found', 'token='.$this->session->data['token'], 'SSL'),
+                'href' => $this->url->link('error/not_found', 'token='.$this->session->data['token'], true),
             );
 
             $data['header'] = $this->load->controller('common/header');
             $data['column_left'] = $this->load->controller('common/column_left');
             $data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->load->view('error/not_found.tpl', $data));
+            $this->response->setOutput($this->load->view('error/not_found', $data));
         }
     }
 
@@ -1918,7 +1918,7 @@ class ControllerSellerseller extends Controller
             );
         }
 
-        $this->response->setOutput($this->load->view('seller/seller_badge.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_badge', $data));
     }
     public function sellerproduct()
     {
@@ -2005,7 +2005,7 @@ class ControllerSellerseller extends Controller
                 'special' => $special,
                 'quantity' => $result['quantity'],
                 'status' => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit' => $this->url->link('catalog/product/edit', 'token='.$this->session->data['token'].'&product_id='.$result['product_id'], 'SSL'),
+                'edit' => $this->url->link('catalog/product/edit', 'token='.$this->session->data['token'].'&product_id='.$result['product_id'], true),
             );
         }
 
@@ -2014,13 +2014,13 @@ class ControllerSellerseller extends Controller
         $pagination->total = $product_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('seller/seller/sellerproduct', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/sellerproduct', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($product_total - 10)) ? $product_total : ((($page - 1) * 10) + 10), $product_total, ceil($product_total / 10));
 
-        $this->response->setOutput($this->load->view('seller/seller_sellerproduct.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_sellerproduct', $data));
     }
 
     public function sellerproductdelete()
@@ -2109,7 +2109,7 @@ class ControllerSellerseller extends Controller
                 'special' => $special,
                 'quantity' => $result['quantity'],
                 'status' => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit' => $this->url->link('catalog/product/edit', 'token='.$this->session->data['token'].'&product_id='.$result['product_id'], 'SSL'),
+                'edit' => $this->url->link('catalog/product/edit', 'token='.$this->session->data['token'].'&product_id='.$result['product_id'], true),
             );
         }
 
@@ -2119,13 +2119,13 @@ class ControllerSellerseller extends Controller
         $pagination->total = $product_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('seller/seller/sellerproduct', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/sellerproduct', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($product_total - 10)) ? $product_total : ((($page - 1) * 10) + 10), $product_total, ceil($product_total / 10));
 
-        $this->response->setOutput($this->load->view('seller/seller_sellerproduct.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_sellerproduct', $data));
     }
 
     public function history()
@@ -2176,13 +2176,13 @@ class ControllerSellerseller extends Controller
         $pagination->total = $history_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('seller/seller/history', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/history', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($history_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($history_total - 10)) ? $history_total : ((($page - 1) * 10) + 10), $history_total, ceil($history_total / 10));
 
-        $this->response->setOutput($this->load->view('seller/seller_history.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_history', $data));
     }
 
     public function transaction()
@@ -2256,13 +2256,13 @@ class ControllerSellerseller extends Controller
         $pagination->total = $transaction_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('seller/seller/transaction', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/transaction', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($transaction_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($transaction_total - 10)) ? $transaction_total : ((($page - 1) * 10) + 10), $transaction_total, ceil($transaction_total / 10));
 
-        $this->response->setOutput($this->load->view('seller/seller_transaction.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_transaction', $data));
     }
 
     public function reward()
@@ -2318,13 +2318,13 @@ class ControllerSellerseller extends Controller
         $pagination->total = $reward_total;
         $pagination->page = $page;
         $pagination->limit = 10;
-        $pagination->url = $this->url->link('seller/seller/reward', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', 'SSL');
+        $pagination->url = $this->url->link('seller/seller/reward', 'token='.$this->session->data['token'].'&seller_id='.$this->request->get['seller_id'].'&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
         $data['results'] = sprintf($this->language->get('text_pagination'), ($reward_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($reward_total - 10)) ? $reward_total : ((($page - 1) * 10) + 10), $reward_total, ceil($reward_total / 10));
 
-        $this->response->setOutput($this->load->view('seller/seller_reward.tpl', $data));
+        $this->response->setOutput($this->load->view('seller/seller_reward', $data));
     }
 
     public function autocomplete()

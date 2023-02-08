@@ -35,3 +35,4 @@ $_['text_sellergoogleplus'] = 'Show seller Google+ account at product page';
 $_['text_sellerinstagram'] = 'Show seller instagram account at product page';
 $_['text_seller_add_product_alert'] = 'Seller Add Product Alert Mail';
 $_['text_edit'] = 'Edit Seller Setting';
+$_['text_success']                 = 'Success: You have modified settings!';
