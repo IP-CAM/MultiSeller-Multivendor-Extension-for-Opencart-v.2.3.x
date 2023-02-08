@@ -560,8 +560,7 @@ class ModelSellerOrder extends Model {
         return $query->row;
     }
 
-    public function addOrderHistory($order_id, $seller_id, , $order_status_id, $settlement = true, $comment = '', $notify = false)
-    {
+    public function addOrderHistory($order_id, $seller_id, $order_status_id, $settlement = true, $comment = '', $notify = false) {
         $this->event->trigger('pre.order.history.add', $order_id);
 
         $order_info = $this->getOrder($order_id, $seller_id);

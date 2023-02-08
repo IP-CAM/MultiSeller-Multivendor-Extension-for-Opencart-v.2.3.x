@@ -1,15 +1,13 @@
 <?php
-
 class ControllersellerproductFileManager extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $this->load->language('sellerproduct/filemanager');
 
         if (isset($this->request->get['filter_name'])) {
             $filter_name = rtrim(str_replace(array('../', '..\\', '..', '*'), '', $this->request->get['filter_name']), '/');
         } else {
-            $filter_name = null;
+            $filter_name = '';
         }
 
         if ($this->customer->isLogged()) {

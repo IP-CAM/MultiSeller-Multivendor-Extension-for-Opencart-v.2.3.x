@@ -794,7 +794,7 @@
 
         $(element).popover({
           html: true,
-		  sanitize: false,
+          sanitize: false,
           placement: 'right',
           trigger: 'manual',
           content: function() {
@@ -845,7 +845,7 @@
 
         $(element).popover({
           html: true,
-		  sanitize: false,
+          sanitize: false,
           placement: 'right',
           trigger: 'manual',
           content: function() {

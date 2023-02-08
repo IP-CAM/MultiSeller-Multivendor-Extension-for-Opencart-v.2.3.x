@@ -381,15 +381,13 @@ class Controllerbadgebadge extends Controller {
 
         $this->load->model('tool/image');
 
-        if (isset($this->request->post['image']) && is_file(DIR_IMAGE.$this->request->post['image'])) {
-            $data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
-        } elseif (!empty($badge_info) && is_file(DIR_IMAGE.$badge_info['image'])) {
-            $data['thumb'] = $this->model_tool_image->resize($badge_info['image'], 100, 100);
-        } else {
-            $data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
-        }
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
-        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		if (is_file(DIR_IMAGE . html_entity_decode($badge_info['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($badge_info['image'], ENT_QUOTES, 'UTF-8'), 100, 100);
+		} else {
+			$data['thumb'] = $data['placeholder'];
+		}
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -552,7 +550,7 @@ class Controllerbadgebadge extends Controller {
                 'seller_id' => $result['customer_id'],
             'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
                     'name' => $result['firstname'].' '.$result['lastname'],
-                'edit' => $this->url->link('catalog/badge/edit', 'token='.$this->session->data['token'].'&badge_id='.$result['badge_id'], true),
+                'edit' => $this->url->link('catalog/badge/edit', 'token=' . $this->session->data['token'] . '&badge_id=' . $result['badge_id'], true),
             );
         }
 
@@ -571,8 +569,7 @@ class Controllerbadgebadge extends Controller {
         $this->response->setOutput($this->load->view('badge/badge_sellerbadge', $data));
     }
 
-    protected function validateForm()
-    {
+    protected function validateForm() {
         if (!$this->user->hasPermission('modify', 'badge/badge')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
@@ -586,8 +583,7 @@ class Controllerbadgebadge extends Controller {
         return !$this->error;
     }
 
-    protected function validateDelete()
-    {
+    protected function validateDelete() {
         if (!$this->user->hasPermission('modify', 'badge/badge')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }

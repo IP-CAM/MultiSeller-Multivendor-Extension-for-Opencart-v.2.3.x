@@ -1,11 +1,8 @@
 <?php
-
-class Controllerbankbank extends Controller
-{
+class Controllerbankbank extends Controller {
     private $error = array();
 
-    public function index()
-    {
+    public function index() {
         $this->load->language('bank/bank');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -15,8 +12,7 @@ class Controllerbankbank extends Controller
         $this->getList();
     }
 
-    public function add()
-    {
+    public function add() {
         $this->load->language('bank/bank');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -42,14 +38,13 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
+            $this->response->redirect($this->url->link('bank/bank', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getForm();
     }
 
-    public function edit()
-    {
+    public function edit() {
         $this->load->language('bank/bank');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -75,14 +70,13 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
+            $this->response->redirect($this->url->link('bank/bank', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getForm();
     }
 
-    public function delete()
-    {
+    public function delete() {
         $this->load->language('bank/bank');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -110,14 +104,13 @@ class Controllerbankbank extends Controller
                 $url .= '&page='.$this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true));
+            $this->response->redirect($this->url->link('bank/bank', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         $this->getList();
     }
 
-    protected function getList()
-    {
+    protected function getList() {
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
@@ -131,7 +124,7 @@ class Controllerbankbank extends Controller
         }
 
         if (isset($this->request->get['page'])) {
-            $page = $this->request->get['page'];
+            $page = (int)$this->request->get['page'];
         } else {
             $page = 1;
         }
@@ -154,16 +147,16 @@ class Controllerbankbank extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token='.$this->session->data['token'], true),
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
         );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('bank/bank', 'token='.$this->session->data['token'].$url, true),
+            'href' => $this->url->link('bank/bank', 'token=' . $this->session->data['token'] . $url, true),
         );
 
-        $data['insert'] = $this->url->link('bank/bank/add', 'token='.$this->session->data['token'].$url, true);
-        $data['delete'] = $this->url->link('bank/bank/delete', 'token='.$this->session->data['token'].$url, true);
+        $data['insert'] = $this->url->link('bank/bank/add', 'token=' . $this->session->data['token'] . $url, true);
+        $data['delete'] = $this->url->link('bank/bank/delete', 'token=' . $this->session->data['token'] . $url, true);
 
         $data['bankes'] = array();
 
@@ -268,8 +261,7 @@ class Controllerbankbank extends Controller
         $this->response->setOutput($this->load->view('bank/bank_list', $data));
     }
 
-    protected function getForm()
-    {
+    protected function getForm() {
         $data['heading_title'] = $this->language->get('heading_title');
 
         $data['text_form'] = !isset($this->request->get['bank_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -366,8 +358,7 @@ class Controllerbankbank extends Controller
         $this->response->setOutput($this->load->view('bank/bank_form', $data));
     }
 
-    protected function validateForm()
-    {
+    protected function validateForm() {
         if (!$this->user->hasPermission('modify', 'bank/bank')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
@@ -381,8 +372,7 @@ class Controllerbankbank extends Controller
         return !$this->error;
     }
 
-    protected function validateDelete()
-    {
+    protected function validateDelete() {
         if (!$this->user->hasPermission('modify', 'bank/bank')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }

@@ -1,11 +1,8 @@
 <?php
-
-class ControllerSellerOrder extends Controller
-{
+class ControllerSellerOrder extends Controller {
     private $error = array();
 
-    public function index()
-    {
+    public function index() {
         $this->load->language('seller/order');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -15,8 +12,7 @@ class ControllerSellerOrder extends Controller
         $this->getList();
     }
 
-    public function add()
-    {
+    public function add() {
         $this->load->language('seller/order');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -259,42 +255,42 @@ class ControllerSellerOrder extends Controller
         if (isset($this->request->get['filter_order_id'])) {
             $filter_order_id = $this->request->get['filter_order_id'];
         } else {
-            $filter_order_id = null;
+            $filter_order_id = '';
         }
 
         if (isset($this->request->get['filter_seller'])) {
             $filter_seller = $this->request->get['filter_seller'];
         } else {
-            $filter_seller = null;
+            $filter_seller = '';
         }
 
         if (isset($this->request->get['filter_order_status'])) {
             $filter_order_status = $this->request->get['filter_order_status'];
         } else {
-            $filter_order_status = null;
+            $filter_order_status = '';
         }
 
         if (isset($this->request->get['filter_total'])) {
             $filter_total = $this->request->get['filter_total'];
         } else {
-            $filter_total = null;
+            $filter_total = '';
         }
 
         if (isset($this->request->get['filter_date_added'])) {
             $filter_date_added = $this->request->get['filter_date_added'];
         } else {
-            $filter_date_added = null;
+            $filter_date_added = '';
         }
 
         if (isset($this->request->get['filter_date_modified'])) {
             $filter_date_modified = $this->request->get['filter_date_modified'];
         } else {
-            $filter_date_modified = null;
+            $filter_date_modified = '';
         }
         if (isset($this->request->get['filter_order_settlement'])) {
             $filter_order_settlement = $this->request->get['filter_order_settlement'];
         } else {
-            $filter_order_settlement = null;
+            $filter_order_settlement = '';
         }
 
         if (isset($this->request->get['sort'])) {
@@ -375,17 +371,17 @@ class ControllerSellerOrder extends Controller
         $data['orders'] = array();
 
         $filter_data = array(
-            'filter_order_id' => $filter_order_id,
-            'filter_seller' => $filter_seller,
-            'filter_order_status' => $filter_order_status,
-            'filter_total' => $filter_total,
-            'filter_date_added' => $filter_date_added,
-            'filter_date_modified' => $filter_date_modified,
+            'filter_order_id'         => $filter_order_id,
+            'filter_seller'           => $filter_seller,
+            'filter_order_status'     => $filter_order_status,
+            'filter_total'            => $filter_total,
+            'filter_date_added'       => $filter_date_added,
+            'filter_date_modified'    => $filter_date_modified,
             'filter_order_settlement' => $filter_order_settlement,
-            'sort' => $sort,
-            'order' => $order,
-            'start' => ($page - 1) * $this->config->get('config_limit_admin'),
-            'limit' => $this->config->get('config_limit_admin'),
+            'sort'                    => $sort,
+            'order'                   => $order,
+            'start'                   => ($page - 1) * $this->config->get('config_limit_admin'),
+            'limit'                   => $this->config->get('config_limit_admin'),
         );
 
         $order_total = $this->model_seller_order->getTotalOrders($filter_data);
@@ -394,19 +390,19 @@ class ControllerSellerOrder extends Controller
 
         foreach ($results as $result) {
             $data['orders'][] = array(
-                'order_id' => $result['order_id'],
-                'seller' => $result['seller'],
-                'status' => $result['status'],
-                'order_settlement' => $this->model_seller_order->getSellrOrdersettlement($result['order_id'], $result['customer_id']),
-                'invoice' => $this->url->link('seller/order/invoice', 'token='.$this->session->data['token'].'&order_id='.$result['order_id'].'&seller_id='.$result['customer_id'].$url, true),
-                'total' => $this->currency->format($result['totals'] + $this->model_seller_order->getOrderTotalsTotal($result['order_id'], $result['seller_id']), $result['currency_code'], $result['currency_value']),
-                'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-                'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
-                'shipping_code' => $result['shipping_code'],
-                'view' => $this->url->link('seller/order/info', 'token='.$this->session->data['token'].'&order_id='.$result['order_id'].'&seller_id='.$result['customer_id'].$url, true),
-                'add_to_transaction' => $this->url->link('seller/order/add_to_transaction', 'token='.$this->session->data['token'].'&seller_id='.$result['customer_id'].'&order_id='.$result['order_id'].$url, true),
-                'edit' => $this->url->link('sale/order/edit', 'token='.$this->session->data['token'].'&order_id='.$result['order_id'].$url, true),
-                'delete' => $this->url->link('seller/order/delete', 'token='.$this->session->data['token'].'&order_id='.$result['order_id'].$url, true),
+                'order_id'           => $result['order_id'],
+                'seller'             => $result['seller'],
+                'status'             => $result['status'],
+                'order_settlement'   => $this->model_seller_order->getSellrOrdersettlement($result['order_id'], $result['customer_id']),
+                'invoice'            => $this->url->link('seller/order/invoice', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . '&seller_id=' . $result['customer_id'] . $url, true),
+                'total'              => $this->currency->format($result['totals'] + $this->model_seller_order->getOrderTotalsTotal($result['order_id'], $result['seller_id']), $result['currency_code'], $result['currency_value']),
+                'date_added'         => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+                'date_modified'      => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
+                'shipping_code'      => $result['shipping_code'],
+                'view'               => $this->url->link('seller/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . '&seller_id=' . $result['customer_id'] . $url, true),
+                'add_to_transaction' => $this->url->link('seller/order/add_to_transaction', 'token=' . $this->session->data['token'] . '&seller_id=' . $result['customer_id'] . '&order_id=' . $result['order_id'] . $url, true),
+                'edit'               => $this->url->link('sale/order/edit', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . $url, true),
+                'delete'             => $this->url->link('seller/order/delete', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . $url, true),
             );
         }
 
