@@ -1,12 +1,8 @@
 <?php
-
-class ControllerorderOrder extends Controller
-{
+class ControllerorderOrder extends Controller {
     private $error = array();
 
-    public function index()
-    {
-
+    public function index() {
 
       if (!$this->customer->isLogged()) {
           $this->session->data['redirect'] = $this->url->link('order/order', '', true);
@@ -27,8 +23,7 @@ class ControllerorderOrder extends Controller
       }
     }
 
-    public function add()
-    {
+    public function add() {
         $this->load->language('order/order');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -80,8 +75,7 @@ class ControllerorderOrder extends Controller
         $this->getForm();
     }
 
-    public function edit()
-    {
+    public function edit() {
         $this->load->language('order/order');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -133,8 +127,7 @@ class ControllerorderOrder extends Controller
         $this->getForm();
     }
 
-    public function delete()
-    {
+    public function delete() {
         $this->load->language('order/order');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -581,20 +574,17 @@ class ControllerorderOrder extends Controller
         $data['order'] = $order;
 
         $data['column_left'] = $this->load->controller('common/column_left');
-    		$data['column_right'] = $this->load->controller('common/column_right');
-    		$data['content_top'] = $this->load->controller('common/content_top');
-    		$data['content_bottom'] = $this->load->controller('common/content_bottom');
-    		$data['footer'] = $this->load->controller('common/footer');
-    		$data['header'] = $this->load->controller('common/header');
+    	$data['column_right'] = $this->load->controller('common/column_right');
+    	$data['content_top'] = $this->load->controller('common/content_top');
+    	$data['content_bottom'] = $this->load->controller('common/content_bottom');
+    	$data['footer'] = $this->load->controller('common/footer');
+    	$data['header'] = $this->load->controller('common/header');
 
-
-
-                $this->response->setOutput($this->load->view('order/order_list', $data));
+        $this->response->setOutput($this->load->view('order/order_list', $data));
 
     }
 
-    public function getForm()
-    {
+    public function getForm() {
         $this->load->model('seller/seller');
 
         $data['heading_title'] = $this->language->get('heading_title');
